@@ -30,7 +30,7 @@ export default function HomePage() {
       <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
         <nav className="max-w-7xl mx-auto flex flex-wrap justify-between items-center py-4 px-4 sm:px-6">
           <Link href="/" className="text-xl sm:text-2xl font-bold text-yellow-500">
-            Clube Desbravadores
+            Clube Desbravadores Águias do Rei
           </Link>
           <ul className="flex flex-wrap gap-4 sm:gap-6 text-sm sm:text-base text-gray-700 font-semibold mt-2 sm:mt-0">
             <li><Link href="/">Home</Link></li>
@@ -50,7 +50,7 @@ export default function HomePage() {
       {/* Banner */}
       <section className="bg-yellow-500 text-white py-16 px-4 text-center">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold max-w-4xl mx-auto mb-4">
-          Bem-vindo ao Clube de Desbravadores Aguiás do Rei
+          Bem-vindo ao Clube de Desbravadores Águias do Rei
         </h1>
         <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
           Um espaço para adolescentes crescerem na fé, amizade e aventura.
