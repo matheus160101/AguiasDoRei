@@ -11,7 +11,7 @@ export default function LoginPage() {
     e.preventDefault()
     if (senha === 'desbrava123') {
       localStorage.setItem('admin', 'true')
-      router.push('/admin') // volta para a home
+      router.push('/admin')
     } else {
       alert('Senha incorreta')
     }
