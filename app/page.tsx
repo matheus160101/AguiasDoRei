@@ -30,7 +30,7 @@ export default function HomePage() {
       <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
         <nav className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center py-3 px-4 sm:px-6 gap-2">
           <Link href="/" className="text-xl sm:text-2xl font-bold text-yellow-500 text-center">
-            Clube Desbravadores
+            Clube Desbravadores Águias do Reis
           </Link>
           <ul className="flex flex-wrap justify-center gap-4 text-sm sm:text-base text-gray-700 font-semibold">
             <li><Link href="/">Home</Link></li>
@@ -49,13 +49,24 @@ export default function HomePage() {
       <div className="h-20" />
 
       {/* Banner */}
-      <section className="bg-yellow-500 text-white py-16 px-4 text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight max-w-3xl mx-auto mb-4">
-          Bem-vindo ao Clube de Desbravadores Aguiás do Rei
-        </h1>
-        <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-          Um espaço para adolescentes crescerem na fé, amizade e aventura.
-        </p>
+      <section
+        className="relative bg-cover bg-center bg-no-repeat py-40 px-4 text-center text-white"
+        style={{
+          backgroundImage: "url('/img/clube.jpg')"
+        }}
+      >
+        {/* Camada de escurecimento para melhor legibilidade */}
+        <div className="absolute inset-0 bg-black/50" />
+
+        {/* Conteúdo visível */}
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+            Bem-vindo ao Clube de Desbravadores Águias do Rei
+          </h1>
+          <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+            Um espaço para adolescentes crescerem na fé, amizade e aventura.
+          </p>
+        </div>
       </section>
 
       {/* Atividades */}
