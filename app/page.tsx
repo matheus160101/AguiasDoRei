@@ -16,7 +16,7 @@ export default function HomePage() {
   const [atividades, setAtividades] = useState<Atividade[]>([])
 
   useEffect(() => {
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/atividades`)
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/atividades`) // Template literal corrigido
       .then(res => setAtividades(res.data))
       .catch(err => {
         console.error('Erro ao buscar atividades:', err)
@@ -67,7 +67,7 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-8">
             {atividades.map((atividade) => (
               <Link
-                href={`/atividades/${atividade._id}`}
+                href={`/atividades/${atividade._id}`} // Aspas e template literal corrigidos
                 key={atividade._id}
                 className="block border border-gray-300 rounded-lg overflow-hidden shadow hover:shadow-lg transition"
               >
