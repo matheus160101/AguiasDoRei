@@ -65,7 +65,7 @@ export default function HomePage() {
           <p className="text-center text-gray-600 italic">Nenhuma atividade publicada.</p>
         ) : (
           <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-8">
-            {atividades.map((atividade, i) => (
+            {atividades.map((atividade) => (
               <Link
                 href={`/atividades/${atividade._id}`}
                 key={atividade._id}
