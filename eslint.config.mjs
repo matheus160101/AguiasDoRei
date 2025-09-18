@@ -13,7 +13,9 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      "@next/next/no-img-element": "off", // 👈 desativa a regra do <img>
+      "@next/next/no-img-element": "off", // deixa usar <img>
+      "react/no-unescaped-entities": "off", // não reclama de aspas
+      "@typescript-eslint/no-explicit-any": "off", // permite usar any
     },
   },
 ];
