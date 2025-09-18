@@ -19,18 +19,30 @@ export default function AdminPage() {
   const [titulo, setTitulo] = useState('')
   const [descricao, setDescricao] = useState('')
   const [imagens, setImagens] = useState<File[]>([])
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
-    const isAdmin = localStorage.getItem('admin') === 'true'
-    if (!isAdmin) {
-      router.push('/login')
+    const token = localStorage.getItem('token')
+    const role = localStorage.getItem('role') || 'desbravador'
+
+    if (!token || role !== 'admin') {
+      router.push('/usuarios/login')
     } else {
-      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/atividades`)
-        .then(res => setAtividades(res.data))
-        .catch(err => console.error(err))
+      carregarAtividades(token)
     }
   }, [router])
+
+  async function carregarAtividades(token: string) {
+    try {
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/atividades`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      setAtividades(res.data)
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   function removerImagem(index: number) {
     setImagens(prev => prev.filter((_, i) => i !== index))
@@ -38,29 +50,28 @@ export default function AdminPage() {
 
   async function handlePostar(e: React.FormEvent) {
     e.preventDefault()
+    setLoading(true)
 
     try {
-      // 1. Envia imagens para /upload e obtém URLs
-      const imagensUrls: string[] = []
+      const token = localStorage.getItem('token')
+      if (!token) return
 
+      const imagensUrls: string[] = []
       for (const img of imagens) {
         const formData = new FormData()
         formData.append('imagem', img)
-
-        const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/upload`,
-          formData,
-          { headers: { 'Content-Type': 'multipart/form-data' } }
-        )
-
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/upload`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` }
+        })
         imagensUrls.push(res.data.url)
       }
 
-      // 2. Envia atividade com URLs
       await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/atividades`, {
         titulo,
         descricao,
         imagens: imagensUrls
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
       })
 
       alert('Atividade publicada com sucesso!')
@@ -68,25 +79,36 @@ export default function AdminPage() {
       setDescricao('')
       setImagens([])
 
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/atividades`)
-      setAtividades(res.data)
+      await carregarAtividades(token)
     } catch (err) {
       console.error(err)
       alert('Erro ao publicar atividade.')
+    } finally {
+      setLoading(false)
     }
   }
 
   async function deletar(id: string | undefined) {
     if (!id) return
-    if (confirm('Deseja realmente apagar esta atividade?')) {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/atividades/${id}`)
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/atividades`)
-      setAtividades(res.data)
+    if (!confirm('Deseja realmente apagar esta atividade?')) return
+
+    try {
+      const token = localStorage.getItem('token')
+      if (!token) return
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/atividades/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      await carregarAtividades(token)
+    } catch (err) {
+      console.error(err)
+      alert('Erro ao deletar atividade.')
     }
   }
 
   function sair() {
-    localStorage.removeItem('admin')
+    localStorage.removeItem('token')
+    localStorage.removeItem('nome')
+    localStorage.removeItem('role')
     router.push('/')
   }
 
@@ -147,9 +169,10 @@ export default function AdminPage() {
         )}
         <button
           type="submit"
-          className="bg-green-600 text-white p-2 rounded hover:bg-green-700 mt-2"
+          className={`bg-green-600 text-white p-2 rounded hover:bg-green-700 mt-2 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={loading}
         >
-          Publicar
+          {loading ? 'Publicando...' : 'Publicar'}
         </button>
       </form>
 

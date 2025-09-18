@@ -30,14 +30,16 @@ export default function HomePage() {
       <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
         <nav className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center py-3 px-4 sm:px-6 gap-2">
           <Link href="/" className="text-xl sm:text-2xl font-bold text-yellow-500 text-center">
-            Clube Desbravadores Águias do Reis
+            Clube Desbravadores Águias do Rei
           </Link>
           <ul className="flex flex-wrap justify-center gap-4 text-sm sm:text-base text-gray-700 font-semibold">
             <li><Link href="/">Home</Link></li>
+            <li><Link href="/especialidades">Especialidades</Link></li>            
+            <li><Link href="#sobre">Sobre</Link></li>
             <li><Link href="#atividades">Atividades</Link></li>
             <li><Link href="#adote">Adote</Link></li>
             <li>
-              <Link href="/login" className="text-yellow-500 hover:underline">
+              <Link href="usuarios/login" className="text-yellow-500 hover:underline">
                 Login
               </Link>
             </li>
@@ -55,10 +57,7 @@ export default function HomePage() {
           backgroundImage: "url('/img/clube.jpg')"
         }}
       >
-        {/* Camada de escurecimento para melhor legibilidade */}
         <div className="absolute inset-0 bg-black/50" />
-
-        {/* Conteúdo visível */}
         <div className="relative z-10 max-w-3xl mx-auto">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4">
             Bem-vindo ao Clube de Desbravadores Águias do Rei
@@ -69,8 +68,29 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Sobre os Desbravadores */}
+      <section className="max-w-7xl mx-auto py-12 px-4 sm:px-6 text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+          Quem são os Desbravadores?
+        </h2>
+        <p className="text-gray-700 leading-relaxed text-sm sm:text-base mb-4">
+          O Clube de Desbravadores é um movimento mundial da Igreja Adventista do
+          Sétimo Dia, presente em mais de 160 países. Ele reúne adolescentes entre
+          10 e 15 anos — independentemente de religião — para desenvolver valores
+          cristãos, cidadania, respeito à natureza, amizade e espírito de
+          cooperação.
+        </p>
+        <p className="text-gray-700 leading-relaxed text-sm sm:text-base mb-4">
+          Em nosso país a história dos Desbravadores padece por falta de registros e documentação comprobatória. Não existem atas, nem livros, nem artigos de revistas, nem jornais que confirmem os fatos relatados. Falando ao jornalista Michelson Borges, da Casa Publicadora Brasileira, Henry Feyerabend disse: "Eu sempre entendi que em Lageado Baixo foi fundado o primeiro Clube do Brasil, mas não tenho nenhuma prova disso, nem certeza tenho, pois não há nenhum registro da organização desse clube". Muitas realizações , nomes de pessoas, datas e informações podem ter caído involuntariamente no anonimato ou simplesmente ter sido esquecidos pelas deficiências naturais da comunicação oral. Conseqüentemente, as versões existentes, aqui apresentadas, podem, num momento ou noutro, chocar-se. Mas que tal encarar tudo isso como parte de um grande e belo mosaico construído por muitos atores?
+ 
+          O que você vai ler a seguir faz parte de um esforço de reconstrução da história, baseado praticamente em lembranças e relatos de personagens muito importantes para os Desbravadores no Brasil. Eles efetivamente contribuíram para estabelecer um programa que deu certo, e o mérito de todos (Cláudio Belz, Edgard Turcílio, Henry Feyerabend, Jairo de Araújo, Jesus Nazarenth Bronze, José Silvestre, Luis Roberto Farias, Osvaldo Haroldo Fuckner, Wilson Sarli... ) foi acreditar no potencial dos juvenis e jovens cristãos de nosso país. A dificuldade de precisar nomes, lugares e datas pode ser a oportunidade de dedicar somente a Cristo as homenagens e o louvou pelo grande empreendimento espiritual e social que é o Clube de Desbravadores.
+          
+          Segundo Claudinei Candido Silva, pesquisador do Departamento de Desbravadores da Associação Geral , o Pastor Jairo Tavares de Araújo, então líder da juventude adventista da Divisão Sul-Americana, com sede ainda no Uruguai foi o primeiro a incentivar a organização de Clubes de Desbravadores na América do Sul. Em 1957, ele preparou um pequeno manual sobre como organizar um Clube de Desbravadores.
+        </p>
+      </section>
+
       {/* Atividades */}
-      <section id="atividades" className="max-w-7xl mx-auto py-12 px-4 sm:px-6">
+      <section id="atividades" className="max-w-7xl mx-auto pb-12 px-4 sm:px-6">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
           Atividades Recentes
         </h2>
